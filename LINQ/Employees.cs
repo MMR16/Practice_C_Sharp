@@ -74,7 +74,10 @@ namespace LINQ
             }
             Console.WriteLine("\n");
         }
-
+        public override string ToString()
+        {
+            return $"{employeeID},{firstName},{lastName},{salary},{age}";
+        }
     }
 }
 

@@ -42,7 +42,7 @@ namespace Safe_Navigation_operator
         public decimal Price
         {
             get => price;
-            set => price = value * 14/100;
+            set => price = value * 1.14m;
         }
 
         public static void DisplayCarDetails (Cars car)
