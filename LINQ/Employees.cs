@@ -16,6 +16,8 @@ namespace LINQ
         private int age;
         private List<int> appraisal;
 
+        public int Did { get; set; }
+
         public int EmployeeID
         {
             get { return employeeID; }
