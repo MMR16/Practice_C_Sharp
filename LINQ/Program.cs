@@ -4,6 +4,7 @@ using System.Linq;
 
 namespace LINQ
 {
+    // TResult Mean Anonymous Onject new {id=1,name="MMR"}
     class Program
     {
         static void Main(string[] args)
@@ -150,7 +151,7 @@ namespace LINQ
             var P3 = listOfEmployees.Select(w => new { w.Age, w.EmployeeID }).ToList();
             //select with where
             //two results only because of select 
-            var P4 = listOfEmployees.Select(w => new { w.Age, w.EmployeeID }).Where(w=>w.EmployeeID>7 && w.Age>30);
+            var P4 = listOfEmployees.Select(w => new { w.Age, w.EmployeeID }).Where(w => w.EmployeeID > 7 && w.Age > 30);
 
             foreach (var item in P4)
             {
@@ -160,11 +161,42 @@ namespace LINQ
             ///Inner Join
             Console.WriteLine("----------------******Joins******------------------");
 
-            var q6 = listOfEmployees.Join(departments,w=>w.Did,d=>d.Did,(a,b)=>new { a.EmployeeID,a.FirstName,a.Age, b.DeptName }) ;
+            var q6 = listOfEmployees.Join(departments, w => w.Did, d => d.Did, (a, b) => new { a.EmployeeID, a.FirstName, a.Age, b.DeptName });
             //Alias
-            var q7 = listOfEmployees.Join(departments, w => w.Did, d => d.Did, (a, b) => new {EmpId= a.EmployeeID, EmpFirstName = a.FirstName, EmpAge = a.Age, EmpDepartment = b.DeptName });
+            var q7 = listOfEmployees.Join(departments, w => w.Did, d => d.Did, (a, b) => new { EmpId = a.EmployeeID, EmpFirstName = a.FirstName, EmpAge = a.Age, EmpDepartment = b.DeptName });
 
             foreach (var item in q6)
+            {
+                Console.WriteLine(item);
+            }
+
+            /////////////////////////////Insert - Update - Delete
+            ///CRUD
+            ///
+            Console.WriteLine("\n----------------******Joins******------------------\n");
+
+            // Adding
+            listOfEmployees.Add(new Employees { Did = 4, EmployeeID = 15, FirstName = "Mostafa", LastName = "Rady", Salary = 7000m, Age = 26, Appraisal = new List<int> { 7, 7, 8, 9, 7 } });
+            //Update
+            var Update = listOfEmployees.LastOrDefault(q=>q.EmployeeID==12);
+            Update.Age = 55;
+            Update.FirstName = "MMMMMMMMM";
+
+            //Deleting
+            //var del = listOfEmployees.Find(ww => ww.EmployeeID == 15);
+            var del2 = listOfEmployees.FirstOrDefault(ww => ww.EmployeeID == 15);
+
+            listOfEmployees.Remove(del2);
+
+
+            foreach (var item in listOfEmployees)
+            {
+                Console.WriteLine(item);
+            }
+
+            // of type + Selecr (Read)
+            var emps = listOfEmployees.OfType<Employees>().Select(w => new { w.Age, w.FirstName });
+            foreach (var item in emps)
             {
                 Console.WriteLine(item);
             }
